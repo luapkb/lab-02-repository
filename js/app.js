@@ -24,11 +24,11 @@ function renderPhoto() {
 //find section on page to appmd
 //create some ell for img
 //append obj to '#photo ceiling'
-  for(let i = 0 ; i < objArr.length; i++){
-    $('#photo-ceiling').append(`<section><h2>${objArr[i].title}</h2><img src="${objArr[i].img}"><p>${objArr[i].description}</p></section>`);
-
-  }
+  objArr.forEach(value =>{
+    $('#photo-ceiling').append(`<section><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></section>`);
+  });
 }
+
 
 // function grabPhoto(){
 //   $.get('data/page-1.json', { title: 'UniWhal'},
@@ -38,12 +38,11 @@ const objArr = [];
 $(document).ready(function() {
   $.get('data/page-1.json')
     .then(function(data){
-      console.log(data);
-      for(let i = 0; i < data.length; i++){
-        new Photo(data[i].image_url, data[i].title, data[i].description, data[i].keyword, data[i].horns);
-      }
-    //     data.forEach(new Photo(data[i].image_url, data[i].title, data[i].description, data[i].keyword, data[i].horns))
-    }); console.log(objArr);
+      data.forEach(value => {
+        new Photo( value.image_url, value.title, value.description, value.keyword, value.horns);
+      });
+      renderPhoto();
+    });
 });
 // filter images
 // selet eliment
