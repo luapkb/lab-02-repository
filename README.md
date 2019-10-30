@@ -1,6 +1,6 @@
 # lab-02-repository
 
-feature # 1 Display images: ________________________________
+feature # 1 Display images: __Driver: Paul - Navigator: Stephen______________________________
 
 Estimate of time needed to complete: ___3 hours_
 
@@ -13,11 +13,11 @@ Actual time needed to complete: ___2 hours__
 
 
 fetuer #2 filter img:
-________________________________
+______Driver: Stephen - Navigator: Paul__________________________
 
 Estimate of time needed to complete: __2 hours___
 
-Start time: _____
+Start time: __13:10___
 
 Finish time: _____
 
