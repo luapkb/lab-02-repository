@@ -25,7 +25,7 @@ function renderPhoto() {
 //create some ell for img
 //append obj to '#photo ceiling'
   objArr.forEach(value =>{
-    $('#photo-ceiling').append(`<section><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></section>`);
+    $('#photo-ceiling').append(`<section id="${value.keyword}"><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></section>`);
   });
 }
 
@@ -42,6 +42,7 @@ $(document).ready(function() {
         new Photo( value.image_url, value.title, value.description, value.keyword, value.horns);
       });
       renderPhoto();
+      keywordOptions();
     });
 });
 // filter images
@@ -49,7 +50,16 @@ $(document).ready(function() {
 // event handler to respond to select
 // run funtion for keyword selction
 // hide all except
+function keywordOptions() {
+  objArr.forEach(value => {
+    $('select').append(`<option value="keyword">${value.keyword}</option>`)
+  })
+}
 
+$('select').change(function(){
+  $('section').toggle();
+  $(`#${$(this).text()}`).toggle();
+})
 
 // style
 // clean and simple shows phots in grid pattern
