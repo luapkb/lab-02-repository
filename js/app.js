@@ -1,5 +1,10 @@
 'use strict';
 
+// let pageOne = 'data/page-1.json';
+// let pageTwo = 'data/page-2.json';
+
+const objArr = [];
+
 // display photos
 // use
 // $.get(url or ie page-1.json', {name:'Steve'}, function (data, textStatus, jqXHR) {
@@ -17,8 +22,6 @@ function Photo( img, title, description, keyword, horns){
   this.description = description;
   this.keyword = keyword;
   this.horns = horns;
-
-  // objArr.push(this);
 }
 
 
@@ -37,7 +40,6 @@ function renderPhoto(arr) {
     let context = {class: `${value.keyword}`, title: `${value.title}`, img: `${value.img}`, description:`${value.description}`};
     let html    = template(context);
     $('#photo-ceiling').append(html);
-    // $('#photo-ceiling').append(`<div class="${value.keyword}"><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></div>`);
   });
 }
 
@@ -46,17 +48,40 @@ function renderPhoto(arr) {
 //   $.get('data/page-1.json', { title: 'UniWhal'},
 // }
 //.then to dostuff
-const objArr = [];
+
 $(document).ready(function() {
-  $.get('data/page-1.json')
-    .then(function(data){
-      data.forEach(value => {
-        let temp = new Photo( value.image_url, value.title, value.description, value.keyword, value.horns);
-        objArr.push(temp);
+  if($('title')[0].innerHTML === 'The Gallery of Horns Page 2'){
+    let pageNum = 'data/page-2.json';
+    $.get(pageNum)
+      .then(function(data){
+        data.forEach(value => {
+          let temp = new Photo( value.image_url, value.title, value.description, value.keyword, value.horns);
+          objArr.push(temp);
+        });
+        renderPhoto(objArr);
+        keywordOptions();
       });
-      renderPhoto(objArr);
-      keywordOptions();
-    });
+  } else {
+    let pageNum = 'data/page-1.json';
+    $.get(pageNum)
+      .then(function(data){
+        data.forEach(value => {
+          let temp = new Photo( value.image_url, value.title, value.description, value.keyword, value.horns);
+          objArr.push(temp);
+        });
+        renderPhoto(objArr);
+        keywordOptions();
+      });
+  }
+  // $.get(pageNum)
+  //   .then(function(data){
+  //     data.forEach(value => {
+  //       let temp = new Photo( value.image_url, value.title, value.description, value.keyword, value.horns);
+  //       objArr.push(temp);
+  //     });
+  //     renderPhoto(objArr);
+  //     keywordOptions();
+  //   });
 });
 // filter images
 // selet eliment
