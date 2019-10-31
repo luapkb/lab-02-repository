@@ -19,14 +19,14 @@ function Photo( img, title, description, keyword, horns){
   this.keyword = keyword;
   this.horns = horns;
 
-  objArr.push(this);
+  // objArr.push(this);
 }
-function renderPhoto() {
+function renderPhoto(arr) {
 //find section on page to appmd
 //create some ell for img
 //append obj to '#photo ceiling'
-  objArr.forEach(value =>{
-    $('#photo-ceiling').append(`<section class="${value.keyword}"><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></section>`);
+  arr.forEach(value =>{
+    $('#photo-ceiling').append(`<div class="${value.keyword}"><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></div>`);
   });
 }
 
@@ -39,9 +39,10 @@ $(document).ready(function() {
   $.get('data/page-1.json')
     .then(function(data){
       data.forEach(value => {
-        new Photo( value.image_url, value.title, value.description, value.keyword, value.horns);
+        let temp = new Photo( value.image_url, value.title, value.description, value.keyword, value.horns);
+        objArr.push(temp);
       });
-      renderPhoto();
+      renderPhoto(objArr);
       keywordOptions();
     });
 });
@@ -52,14 +53,53 @@ $(document).ready(function() {
 // hide all except
 function keywordOptions() {
   objArr.forEach(value => {
-    $('select').append(`<option value=${value.keyword> $"{value.keyword}</option>`)"
+    $('select').append(`<option value="${value.keyword}">${value.keyword}</option>`)
   })
 }
 
-$('select').on(change(function(){
-  $('section').toggle();
+// $('select').on('change', value => {
+//   $('section').hide();
+//   $(`.${value.target[20].innerHTML}`).show();
+//   console.log(value.target);
+// })
+
+$('select').change(function() {
+  $('div').hide();
   let val = $(this).val();
-  $(`.${${val}`).fadeIn();
+  if(val === 'default'){
+    $('div').show();
+  } else {
+    $(`.${val}`).show();
+  }
+})
+//sort alphabetically
+$('#abcButton').click(function(){
+  objArr.sort(function(a, b){
+    let nameA=a.title.toLowerCase(), nameB=b.title.toLowerCase()
+    if (nameA < nameB)
+      return -1
+    if (nameA > nameB)
+      return 1
+    return 0
+  })
+  $('#photo-ceiling').empty();
+  renderPhoto(objArr);
+})
+//sort by horns
+$('#hornButton').click(function(){
+  objArr.sort(function(a,b){
+    let hornsA = Number(a.horns);
+    let hornsB = Number(b.horns);
+    if(hornsA < hornsB){
+      return -1;
+    } else if(hornsA > hornsB){
+      return 1;
+    } else {
+      return 0;
+    }
+  })
+  $('#photo-ceiling').empty();
+  renderPhoto(objArr);
 })
 
 // style
