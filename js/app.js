@@ -86,13 +86,15 @@ $('select').change(function() {
 //sort alphabetically
 $('#abcButton').click(function(){
   objArr.sort(function(a, b){
-    let nameA=a.title.toLowerCase(), nameB=b.title.toLowerCase()
-    if (nameA < nameB)
-      return -1
-    if (nameA > nameB)
-      return 1
-    return 0
-  })
+    let nameA = a.title.toLowerCase(), nameB = b.title.toLowerCase();
+    if (nameA < nameB){
+      return -1;
+    }if (nameA > nameB){
+      return 1;
+    }else{
+      return 0;
+    }
+  });
   $('#photo-ceiling').empty();
   renderPhoto(objArr);
 })
