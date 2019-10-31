@@ -20,12 +20,24 @@ function Photo( img, title, description, keyword, horns){
 
   // objArr.push(this);
 }
+
+
+let source   = document.getElementById('entry-template').innerHTML;
+let template = Handlebars.compile(source);
+
+
+
+// $('#photo-ceiling').append(html);
+
 function renderPhoto(arr) {
 //find section on page to appmd
 //create some ell for img
 //append obj to '#photo ceiling'
   arr.forEach(value =>{
-    $('#photo-ceiling').append(`<div class="${value.keyword}"><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></div>`);
+    let context = {class: `${value.keyword}`, title: `${value.title}`, img: `${value.img}`, description:`${value.description}`};
+    let html    = template(context);
+    $('#photo-ceiling').append(html);
+    // $('#photo-ceiling').append(`<div class="${value.keyword}"><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></div>`);
   });
 }
 
@@ -52,8 +64,12 @@ $(document).ready(function() {
 // run funtion for keyword selction
 // hide all except
 function keywordOptions() {
+  let tempArr = [];
   objArr.forEach(value => {
-    $('select').append(`<option value="${value.keyword}">${value.keyword}</option>`)
+    if(!tempArr.includes(value.keyword)){
+      tempArr.push(value.keyword);
+      $('select').append(`<option value="${value.keyword}">${value.keyword}</option>`)
+    }
   })
 }
 
@@ -101,6 +117,7 @@ $('#hornButton').click(function(){
   $('#photo-ceiling').empty();
   renderPhoto(objArr);
 })
+
 
 // style
 // clean and simple shows phots in grid pattern
