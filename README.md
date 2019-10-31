@@ -55,7 +55,7 @@ Start time: _10:00__
 
 Finish time: __11:00___
 
-Actual time needed to complete: _____
+Actual time needed to complete: __1hour___
 
 
 feature #5 Styling with FelxBox: __________Driver: Paul - Navigator: Stephen______________________
@@ -64,6 +64,6 @@ Estimate of time needed to complete: __2hours___
 
 Start time: __12:00___
 
-Finish time: _____
+Finish time: ___1326__
 
-Actual time needed to complete: _____
+Actual time needed to complete: __1.5hours___
