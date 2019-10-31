@@ -1,5 +1,6 @@
 'use strict';
 
+const objArr = [];
 // display photos
 // use
 // $.get(url or ie page-1.json', {name:'Steve'}, function (data, textStatus, jqXHR) {
@@ -25,7 +26,7 @@ function renderPhoto() {
 //create some ell for img
 //append obj to '#photo ceiling'
   objArr.forEach(value =>{
-    $('#photo-ceiling').append(`<section id="${value.keyword}"><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></section>`);
+    $('#photo-ceiling').append(`<section class="${value.keyword}"><h2>${value.title}</h2><img src="${value.img}"><p>${value.description}</p></section>`);
   });
 }
 
@@ -34,7 +35,6 @@ function renderPhoto() {
 //   $.get('data/page-1.json', { title: 'UniWhal'},
 // }
 //.then to dostuff
-const objArr = [];
 $(document).ready(function() {
   $.get('data/page-1.json')
     .then(function(data){
@@ -52,13 +52,14 @@ $(document).ready(function() {
 // hide all except
 function keywordOptions() {
   objArr.forEach(value => {
-    $('select').append(`<option value="keyword">${value.keyword}</option>`)
+    $('select').append(`<option value=${value.keyword> $"{value.keyword}</option>`)"
   })
 }
 
-$('select').change(function(){
+$('select').on(change(function(){
   $('section').toggle();
-  $(`#${$(this).text()}`).toggle();
+  let val = $(this).val();
+  $(`.${${val}`).fadeIn();
 })
 
 // style
